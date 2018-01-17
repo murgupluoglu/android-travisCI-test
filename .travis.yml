@@ -14,11 +14,3 @@ android:
     - 'android-sdk-license-.+'
     - '.+'
 
-  notifications:
-    email: false
-
-before_install:
-  - mkdir "$ANDROID_HOME/licenses" || true
-
-script:
-  - ./gradlew build connectedCheck --info
