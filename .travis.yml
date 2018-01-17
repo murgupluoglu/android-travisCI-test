@@ -1,23 +1,26 @@
 language: android
 jdk: oraclejdk8
-env:
-  matrix:
-    - ANDROID_TARGET=android-26 ANDROID_ABI=armeabi-v7a
+sudo: false
+
 android:
   components:
     - tools
     - platform-tools
     - tools
-    - build-tools-26.0.1
+    - build-tools-26.0.2
     - android-26
-    - extra-android-m2repository
-    - sys-img-armeabi-v7a-android-26
-    - extra-android-support
+
   licenses:
-    - android-sdk-preview-license-52d11cd2
-    - android-sdk-license-.+
-    - google-gdk-license-.+
-before_script:
-- chmod +x ./gradlew
+    - 'android-sdk-license-.+'
+    - '.+'
+
+  notifications:
+    email: false
+
+before_install:
+  - mkdir "$ANDROID_HOME/licenses" || true
+  - echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_HOME/licenses/android-sdk-license"
+  - echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_HOME/licenses/android-sdk-preview-license"
+
 script:
-- ./gradlew build
+  - ./gradlew build connectedCheck --info
