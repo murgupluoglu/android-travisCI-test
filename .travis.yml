@@ -5,8 +5,8 @@ sudo: false
 android:
   components:
     - tools
-    - build-tools-26.0.2
-    - android-26
+    - build-tools-22.0.1
+    - android-22
     - extra-android-m2repository
     - extra-android-support
     - sys-img-armeabi-v7a-google_apis-22
@@ -21,6 +21,7 @@ before_install:
   - echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_HOME/licenses/android-sdk-preview-license"
   
 before_script:
+  - android list targets
   - echo no | android create avd --force -n test -t android-22 --abi google_apis/armeabi-v7a
   - emulator -avd test -no-window &
   - android-wait-for-emulator
