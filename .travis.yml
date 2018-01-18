@@ -11,8 +11,10 @@ android:
     - extra-android-support
     - sys-img-armeabi-v7a-google_apis-22
   licenses:
-      - android-sdk-license-.+
-      - '.+'
+    - 'android-sdk-preview-license-.+'
+    - 'android-sdk-license-.+'
+    - 'google-gdk-license-.+'
+    - '.+'
 
 before_install:
   - chmod +x gradlew
