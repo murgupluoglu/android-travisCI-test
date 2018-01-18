@@ -2,6 +2,10 @@ language: android
 jdk: oraclejdk8
 sudo: false
 
+env:
+  matrix:
+    - ANDROID_TARGET=android-21  ANDROID_ABI=armeabi-v7a
+
 android:
   components:
     - tools
@@ -9,7 +13,7 @@ android:
     - android-26
     - extra-android-m2repository
     - extra-android-support
-    - sys-img-armeabi-v7a-android-22
+    - sys-img-armeabi-v7a-$ANDROID_TARGET
   licenses:
       - android-sdk-license-.+
       - '.+'
@@ -21,7 +25,7 @@ before_install:
   - echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_HOME/licenses/android-sdk-preview-license"
   
 before_script:
-  - echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a
+  - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
   - emulator -avd test -no-skin -no-audio -no-window &
   - android-wait-for-emulator
   - adb shell input keyevent 82 &
